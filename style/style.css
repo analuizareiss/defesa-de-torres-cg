@@ -1,0 +1,75 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  background: #12141c;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #f2f0e9;
+}
+
+#game-canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+#hud {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(18, 20, 28, 0.6);
+  border: 1px solid rgba(242, 240, 233, 0.15);
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.4;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#hud-hp span,
+#hud-score span {
+  font-weight: 600;
+  color: #e8a24b;
+}
+
+#game-over-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(10, 11, 15, 0.85);
+  text-align: center;
+}
+
+#game-over-screen.hidden {
+  display: none;
+}
+
+#game-over-screen h1 {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: 0.02em;
+}
+
+#restart-button {
+  padding: 10px 22px;
+  font-size: 16px;
+  color: #12141c;
+  background: #e8a24b;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#restart-button:hover {
+  filter: brightness(1.08);
+}

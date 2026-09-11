@@ -4,5 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Defesa de Torres</title>
+  <link rel="stylesheet" href="style/style.css" />
 </head>
+<body>
+  <canvas id="game-canvas"></canvas>
+
+  <div id="hud">
+    <div id="hud-hp">Vida da torre: <span id="hp-value">100</span></div>
+    <div id="hud-score">Pontos: <span id="score-value">0</span></div>
+  </div>
+
+  <div id="game-over-screen" class="hidden">
+    <h1>Game Over</h1>
+    <p id="final-score"></p>
+    <button id="restart-button">Reiniciar</button>
+  </div>
+
+  <script type="module" src="game/main.js"></script>
+</body>
 </html>
