@@ -38,6 +38,31 @@ html, body {
   color: #e8a24b;
 }
 
+#hp-bar {
+  width: 160px;
+  height: 10px;
+  margin-top: 4px;
+  background: rgba(242, 240, 233, 0.15);
+  border: 1px solid rgba(242, 240, 233, 0.25);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#hp-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: #6fcf7a;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+#hp-bar-fill.mid {
+  background: #e8a24b;
+}
+
+#hp-bar-fill.low {
+  background: #e05a4e;
+}
+
 #game-over-screen {
   position: fixed;
   inset: 0;

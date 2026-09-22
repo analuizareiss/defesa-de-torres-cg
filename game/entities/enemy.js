@@ -3,8 +3,11 @@ import { Entity } from './entity.js';
 const ENEMY_COLOR = [0.82, 0.24, 0.24, 1]; // vermelho
 
 export class Enemy extends Entity {
-  constructor({ x, y, radius = 28, maxHp = 30, speed = 60, damage = 8, attackRate = 1, scoreValue = 10 } = {}) {
-    super(x, y, radius, ENEMY_COLOR);
+  constructor({
+    x, y, radius = 28, maxHp = 30, speed = 60, damage = 8, attackRate = 1, scoreValue = 10,
+    texture = null, frameCount = 1, frameDuration = 0.15,
+  } = {}) {
+    super(x, y, radius, ENEMY_COLOR, texture);
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.speed = speed;
@@ -12,11 +15,26 @@ export class Enemy extends Entity {
     this.attackRate = attackRate; 
     this.attackCooldown = 0;
     this.scoreValue = scoreValue;
+
+    this.frameCount = frameCount;
+    this.frameDuration = frameDuration;
+    this.frameTimer = 0;
+    this.currentFrame = 0;
   }
 
   takeDamage(amount) {
     this.hp = Math.max(0, this.hp - amount);
     if (this.hp <= 0) this.alive = false;
+  }
+
+  updateAnimation(deltaTime) {
+    if (this.frameCount <= 1) return;
+
+    this.frameTimer += deltaTime;
+    if (this.frameTimer >= this.frameDuration) {
+      this.frameTimer -= this.frameDuration;
+      this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+    }
   }
 
   /**
@@ -25,6 +43,8 @@ export class Enemy extends Entity {
    */
   update(deltaTime, tower) {
     if (!this.alive) return;
+
+    this.updateAnimation(deltaTime);
 
     const dx = tower.x - this.x;
     const dy = tower.y - this.y;
