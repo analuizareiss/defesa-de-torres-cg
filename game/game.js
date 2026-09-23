@@ -11,6 +11,8 @@ export class Game {
     this.worldWidth = worldWidth;
     this.worldHeight = worldHeight;
     this.spawner = new EnemySpawner({ worldWidth, worldHeight });
+    this.enemyTexture = null;
+    this.enemyFrameCount = 1;
     this.reset();
   }
 
@@ -24,7 +26,11 @@ export class Game {
   }
 
   spawnEnemy(position) {
-    this.enemies.push(new Enemy({ x: position.x, y: position.y }));
+    this.enemies.push(new Enemy({
+      x: position.x, y: position.y,
+      texture: this.enemyTexture,
+      frameCount: this.enemyFrameCount,
+    }));
   }
 
   spawnProjectile(x, y, target, damage) {
