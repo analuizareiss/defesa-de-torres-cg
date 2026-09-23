@@ -31,6 +31,12 @@ loadTexture(renderer.gl, '../assets/tower.png')
   })
   .catch((err) => console.error(err));
 
+loadTexture(renderer.gl, '../assets/skull.png')
+  .then((texture) => {
+    game.skullTexture = texture;
+  })
+  .catch((err) => console.error(err));
+
 const hpValueEl = document.getElementById('hp-value');
 const hpBarFillEl = document.getElementById('hp-bar-fill');
 const scoreValueEl = document.getElementById('score-value');

@@ -34,7 +34,9 @@ export class Game {
   }
 
   spawnProjectile(x, y, target, damage) {
-    this.projectiles.push(new Projectile(x, y, target, damage));
+    const p = new Projectile(x, y, target, damage);
+    p.texture = this.skullTexture;
+    this.projectiles.push(p);
   }
 
   handleClick(worldX, worldY) {
