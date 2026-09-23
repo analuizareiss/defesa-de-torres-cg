@@ -3,8 +3,10 @@ import { Entity } from './entity.js';
 const TOWER_COLOR = [0.91, 0.64, 0.29, 1]; //laranja
 
 export class Tower extends Entity {
-  constructor({ x = 0, y = 0, radius = 60, maxHp = 100, range = 500, fireRate = 1.5, damage = 12 } = {}) {
+  constructor({ x = 0, y = 0, radius = 50, maxHp = 100, range = 500, fireRate = 1.5, damage = 12 } = {}) {
     super(x, y, radius, TOWER_COLOR);
+    this.width = 80;
+    this.height = 120;
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.range = range;
