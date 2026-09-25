@@ -2,7 +2,6 @@ import { Renderer } from './renderer.js';
 import { Game } from './game.js';
 import { loadTexture } from '../utils/texture-loader.js';
 
-
 const WORLD_WIDTH = 1600;
 const WORLD_HEIGHT = 900;
 
@@ -73,6 +72,16 @@ canvas.addEventListener('click', (event) => {
 
   game.handleClick(worldX, worldY);
 });
+
+const bgMusic = new Audio('../assets/music.ogg');
+bgMusic.loop = true;
+bgMusic.volume = 0.4;
+
+canvas.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+  }
+}, { once: true });
 
 function render() {
   renderer.clear();
