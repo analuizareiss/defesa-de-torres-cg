@@ -81,7 +81,9 @@ export class Game {
       if (!enemy.alive) {
         this.score += enemy.scoreValue;
         if (Math.random() < POWERUP_DROP_CHANCE) {
-          this.powerups.push(new PowerUp(enemy.x, enemy.y));
+          const pu = new PowerUp(enemy.x, enemy.y);
+          pu.texture = this.potionTexture;
+          this.powerups.push(pu);
         }
         return false;
       }
