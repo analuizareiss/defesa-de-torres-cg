@@ -23,10 +23,9 @@ loadTexture(renderer.gl, '../assets/background.png')
   })
   .catch((err) => console.error(err));
 
-let towerTexture = null;
 loadTexture(renderer.gl, '../assets/tower.png')
   .then((texture) => {
-    towerTexture = game.tower.texture = texture;
+    game.tower.texture = texture;
   })
   .catch((err) => console.error(err));
 
@@ -67,8 +66,12 @@ canvas.addEventListener('click', (event) => {
   const cssX = event.clientX - rect.left;
   const cssY = event.clientY - rect.top;
 
-  const worldX = (cssX / rect.width - 0.5) * WORLD_WIDTH;
-  const worldY = -(cssY / rect.height - 0.5) * WORLD_HEIGHT;
+  const canvasAspect = canvas.width / canvas.height;
+  const worldAspect = WORLD_WIDTH / WORLD_HEIGHT;
+  const aspectFix = canvasAspect / worldAspect;
+
+  const worldX =  (cssX / rect.width  - 0.5) * WORLD_WIDTH;
+  const worldY = -(cssY / rect.height - 0.5) * WORLD_HEIGHT * aspectFix;
 
   game.handleClick(worldX, worldY);
 });
@@ -89,6 +92,7 @@ function render() {
   renderer.drawEntity(game.tower);
   for (const enemy of game.enemies) renderer.drawEntity(enemy);
   for (const projectile of game.projectiles) renderer.drawEntity(projectile);
+  for (const pu of game.powerups) renderer.drawEntity(pu);
 }
 
 let lastTime = 0;

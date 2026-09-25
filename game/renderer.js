@@ -1,5 +1,5 @@
 import { createProgram, resizeCanvasToDisplaySize } from '../utils/shader-loader.js';
-import { multiply, translation, scaling, projection } from '../utils/math.js';
+import { multiply, translation, scaling } from '../utils/math.js';
 import { vertexShaderSource, fragmentShaderSource } from './shaders.js';
 
 const QUAD_VERTICES = new Float32Array([
@@ -76,14 +76,29 @@ export class Renderer {
 
   clear() {
     const gl = this.gl;
-    gl.clearColor(0.93, 0.94, 0.97, 1);
+    gl.clearColor(0.13, 0.08, 0.18, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
+  }
+
+  // Constrói a matriz de projeção levando em conta a proporção real do canvas
+  _projectionMatrix() {
+    const canvasAspect = this.canvas.width / this.canvas.height;
+    const worldAspect  = this.worldWidth / this.worldHeight;
+    const aspectFix    = worldAspect / canvasAspect;
+
+    // Escala X: mapeia worldWidth para [-1, 1]
+    // Escala Y: idem para worldHeight, mas corrigido pela diferença de aspect ratio
+    return new Float32Array([
+      2 / this.worldWidth, 0, 0,
+      0, (2 / this.worldHeight) * aspectFix, 0,
+      0, 0, 1,
+    ]);
   }
 
   drawQuad(x, y, width, height, color, texture = null, uvOffset = [0, 0], uvScale = [1, 1]) {
     const gl = this.gl;
     const matrix = multiply(
-      projection(this.worldWidth, this.worldHeight),
+      this._projectionMatrix(),
       multiply(translation(x, y), scaling(width, height))
     );
 
@@ -112,8 +127,12 @@ export class Renderer {
     const uvScale = [1 / frameCount, 1];
     const uvOffset = [currentFrame / frameCount, 0];
 
+    // Usa width/height se definidos, senão cai em radius * 2
+    const w = entity.width  ?? entity.radius * 2;
+    const h = entity.height ?? entity.radius * 2;
+
     this.drawQuad(
-      entity.x, entity.y, entity.radius * 2, entity.radius * 2,
+      entity.x, entity.y, w, h,
       entity.color, entity.texture, uvOffset, uvScale
     );
   }
