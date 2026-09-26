@@ -9,7 +9,7 @@ const canvas = document.getElementById('game-canvas');
 const renderer = new Renderer(canvas, WORLD_WIDTH, WORLD_HEIGHT);
 const game = new Game({ worldWidth: WORLD_WIDTH, worldHeight: WORLD_HEIGHT });
 
-loadTexture(renderer.gl, '../assets/enemy_ghost.png')
+loadTexture(renderer.gl, './assets/enemy_ghost.png')
   .then((texture) => {
     game.enemyTexture = texture;
     game.enemyFrameCount = 4;
@@ -17,26 +17,26 @@ loadTexture(renderer.gl, '../assets/enemy_ghost.png')
   .catch((err) => console.error(err));
 
 let backgroundTexture = null;
-loadTexture(renderer.gl, '../assets/background.png')
+loadTexture(renderer.gl, './assets/background.png')
   .then((texture) => {
     backgroundTexture = texture;
   })
   .catch((err) => console.error(err));
 
-loadTexture(renderer.gl, '../assets/tower.png')
+loadTexture(renderer.gl, './assets/tower.png')
   .then((texture) => {
     game.towerTexture = texture;
     game.tower.texture = texture;
   })
   .catch((err) => console.error(err));
 
-loadTexture(renderer.gl, '../assets/skull.png')
+loadTexture(renderer.gl, './assets/skull.png')
   .then((texture) => {
     game.skullTexture = texture;
   })
   .catch((err) => console.error(err));
 
-loadTexture(renderer.gl, '../assets/powerup_potion.png')
+loadTexture(renderer.gl, './assets/powerup_potion.png')
   .then((texture) => { game.potionTexture = texture; })
   .catch((err) => console.error(err));
 
