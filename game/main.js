@@ -81,7 +81,7 @@ canvas.addEventListener('click', (event) => {
   game.handleClick(worldX, worldY);
 });
 
-const bgMusic = new Audio('../assets/music.ogg');
+const bgMusic = new Audio('./assets/music.ogg');
 bgMusic.loop = true;
 bgMusic.volume = 0.4;
 
