@@ -76,7 +76,7 @@ export class Renderer {
 
   clear() {
     const gl = this.gl;
-    gl.clearColor(0.13, 0.08, 0.18, 1);
+    gl.clearColor(0.20, 0.21, 0.23, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
   }
 
