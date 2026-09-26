@@ -22,6 +22,7 @@ export class Game {
 
   reset() {
     this.tower = new Tower({ x: 0, y: 0 });
+    if (this.towerTexture) this.tower.texture = this.towerTexture;
     this.enemies = [];
     this.projectiles = [];
     this.powerups = [];

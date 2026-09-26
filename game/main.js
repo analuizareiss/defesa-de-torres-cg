@@ -25,6 +25,7 @@ loadTexture(renderer.gl, '../assets/background.png')
 
 loadTexture(renderer.gl, '../assets/tower.png')
   .then((texture) => {
+    game.towerTexture = texture;
     game.tower.texture = texture;
   })
   .catch((err) => console.error(err));
