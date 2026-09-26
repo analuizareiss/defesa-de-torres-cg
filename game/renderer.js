@@ -139,6 +139,27 @@ export class Renderer {
 
   drawBackground(texture) {
     if (!texture) return;
-    this.drawQuad(0, 0, this.worldWidth, this.worldHeight, [1, 1, 1, 1], texture);
+    const gl = this.gl;
+
+    const matrix = multiply(
+      new Float32Array([
+        2 / this.worldWidth, 0, 0,
+        0, 2 / this.worldHeight, 0,
+        0, 0, 1,
+      ]),
+      multiply(translation(0, 0), scaling(this.worldWidth, this.worldHeight))
+    );
+
+    gl.useProgram(this.program);
+    gl.bindVertexArray(this.vao);
+    gl.uniformMatrix3fv(this.matrixUniformLocation, false, matrix);
+    gl.uniform4fv(this.colorUniformLocation, [1, 1, 1, 1]);
+    gl.uniform2fv(this.uvOffsetUniformLocation, [0, 0]);
+    gl.uniform2fv(this.uvScaleUniformLocation, [1, 1]);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.uniform1i(this.textureUniformLocation, 0);
+    gl.uniform1i(this.useTextureUniformLocation, 1);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 }
